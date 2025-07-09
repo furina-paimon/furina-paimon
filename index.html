@@ -162,18 +162,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/furina-paimon/archives/">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/furina-paimon/categories/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/furina-paimon/tags/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -219,7 +219,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://furina-paimon.github.io/furina-paimon/2025/03/29/My-New-Post/">
+    <link itemprop="mainEntityOfPage" href="https://furina-paimon.github.io/furina-paimon/2025/07/09/Linux%E9%83%A8%E7%BD%B2flask%E6%9C%8D%E5%8A%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/furina-paimon/images/avatar.gif">
@@ -237,7 +237,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/furina-paimon/2025/03/29/My-New-Post/" class="post-title-link" itemprop="url">My New Post</a>
+          <a href="/furina-paimon/2025/07/09/Linux%E9%83%A8%E7%BD%B2flask%E6%9C%8D%E5%8A%A1/" class="post-title-link" itemprop="url">Linux部署flask服务</a>
         </h2>
 
         <div class="post-meta-container">
@@ -247,8 +247,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2025-03-29 19:34:42" itemprop="dateCreated datePublished" datetime="2025-03-29T19:34:42+08:00">2025-03-29</time>
+      <time title="创建时间：2025-07-09 20:57:28 / 修改时间：20:57:59" itemprop="dateCreated datePublished" datetime="2025-07-09T20:57:28+08:00">2025-07-09</time>
     </span>
 
   <div class="post-meta">
@@ -263,7 +264,7 @@
   </span>
   <span class="date">
     <i class="icon-date"></i>
-    <time datetime="1743248082000"></time>
+    <time datetime="1752065848000"></time>
   </span>
 </div>
     <span class="post-meta-break"></span>
@@ -272,7 +273,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>0</span>
+      <span>274</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -290,533 +291,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
+          <h4 id="linux部署flask服务器"><a href="#linux部署flask服务器" class="headerlink" title="linux部署flask服务器"></a>linux部署flask服务器</h4><h6 id="设置中科大docker镜像源"><a href="#设置中科大docker镜像源" class="headerlink" title="设置中科大docker镜像源"></a>设置中科大docker镜像源</h6><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/docker/daemon.json</span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;registry-mirrors&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;https://mirror.iscas.ac.cn&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-    
-    
-    
+<h6 id="按照-Python-和-requirements-txt-依赖"><a href="#按照-Python-和-requirements-txt-依赖" class="headerlink" title="按照 Python 和 requirements.txt 依赖"></a>按照 Python 和 requirements.txt 依赖</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl restart docker</span><br><span class="line"><span class="built_in">sudo</span> docker info</span><br><span class="line"></span><br><span class="line">apt install python3-pip</span><br><span class="line">python -m pip install --upgrade pip</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> add-apt-repository ppa:deadsnakes/ppa</span><br><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install python3.10</span><br><span class="line">python3.10 --version</span><br><span class="line"></span><br><span class="line"><span class="comment"># root@gxyhkpro2ecsYNSIC9jP9q1:/ServerWS# python3.10 --version</span></span><br><span class="line"><span class="comment"># Python 3.10.18</span></span><br><span class="line"></span><br><span class="line">pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install libzbar0</span><br></pre></td></tr></table></figure>
 
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
+<h6 id="使用-iptables-管理防火墙"><a href="#使用-iptables-管理防火墙" class="headerlink" title="使用 iptables 管理防火墙"></a>使用 iptables 管理防火墙</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> iptables --version</span><br><span class="line"></span><br><span class="line"><span class="comment"># 允许已建立的连接</span></span><br><span class="line"><span class="built_in">sudo</span> iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="comment"># 允许 SSH 连接</span></span><br><span class="line"><span class="built_in">sudo</span> iptables -A INPUT -p tcp --dport 22 -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更改默认策略为 DROP</span></span><br><span class="line"><span class="built_in">sudo</span> iptables -P INPUT DROP</span><br><span class="line"></span><br><span class="line"><span class="comment"># 允许 Waitress 服务器的端口</span></span><br><span class="line"><span class="built_in">sudo</span> iptables -A INPUT -p tcp --dport 31001 -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="comment"># 允许 ICMP 请求（可选）</span></span><br><span class="line"><span class="built_in">sudo</span> iptables -A INPUT -p icmp -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找文件夹</span></span><br><span class="line"><span class="built_in">sudo</span> find / -<span class="built_in">type</span> d -name website</span><br></pre></td></tr></table></figure>
 
+<h6 id="用-screen-管理会话"><a href="#用-screen-管理会话" class="headerlink" title="用 screen 管理会话"></a>用 screen 管理会话</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定名称，也可使用PID</span></span><br><span class="line">screen -S WebsiteBackend</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有会话</span></span><br><span class="line">screen -<span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 分离当前会话</span></span><br><span class="line">[ Keyboard ]  Ctrl+A D</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新连接到一个会话</span></span><br><span class="line">screen -r WebsiteBackend</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭一个会话</span></span><br><span class="line">screen -XS WebsiteBackend quit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 发送命令到会话</span></span><br><span class="line">screen -XS WebsiteBackend &lt;<span class="built_in">command</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置自动重连</span></span><br><span class="line">screen -r -d WebsiteBackend</span><br></pre></td></tr></table></figure>
 
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://furina-paimon.github.io/furina-paimon/2025/03/19/Hexo-GUI-2-0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/furina-paimon/images/avatar.gif">
-      <meta itemprop="name" content="River Moon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FOCALORS's BLOG">
-      <meta itemprop="description" content="FOCALORS's BLOG">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | FOCALORS's BLOG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/furina-paimon/2025/03/19/Hexo-GUI-2-0/" class="post-title-link" itemprop="url">Hexo GUI 2.0</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-03-19 20:22:46" itemprop="dateCreated datePublished" datetime="2025-03-19T20:22:46+08:00">2025-03-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-23 12:49:50" itemprop="dateModified" datetime="2025-03-23T12:49:50+08:00">2025-03-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/furina-paimon/categories/src/" itemprop="url" rel="index"><span itemprop="name">src</span></a>
-        </span>
-    </span>
-
-  <div class="post-meta">
-  <span class="author">
-    <i class="icon-author"></i>
-    <a href="function () {
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-      }
-      return obj[val].apply(obj, args);
-    }"></a>
-  </span>
-  <span class="date">
-    <i class="icon-date"></i>
-    <time datetime="1742386966000"></time>
-  </span>
-</div>
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>831</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Hexo-GUI-2-0"><a href="#Hexo-GUI-2-0" class="headerlink" title="Hexo GUI 2.0"></a>Hexo GUI 2.0</h1><p>Quisque tempor feugiat quam, sit amet rhoncus nisl rhoncus eu. Nullam blandit lobortis condimentum. Nulla nec ante sodales, elementum elit eu, bibendum metus. Mauris nec finibus nulla. Mauris faucibus, sem sit amet vestibulum pulvinar, ipsum purus blandit eros, et tincidunt lectus orci nec mi. Nullam nec luctus neque. Morbi in felis sit amet magna elementum commodo. Praesent imperdiet tortor eget lobortis consequat. Nulla facilisi.</p>
-<p>Fusce lobortis consectetur nibh et tincidunt. Nulla quis eros in massa congue tincidunt. Suspendisse eget metus nisl. Nullam sit amet nunc et quam hendrerit pretium eu ac est. Curabitur ut dolor bibendum, varius risus id, iaculis neque. Etiam ipsum nibh, interdum nec quam eget, laoreet convallis ex. Sed ultricies fringilla tortor vitae congue. Maecenas pretium, odio id luctus tempor, sapien magna euismod lectus, non dictum ligula quam vehicula tortor. Morbi sed leo ut justo porttitor bibendum eget et orci. Donec vehicula dictum malesuada. Nam a nisl pretium, ornare lorem in, pellentesque arcu. Phasellus tristique in ante sed fringilla. Sed id lorem sagittis, molestie dolor vel, auctor nulla. Quisque id nunc ante.</p>
-<p>Curabitur a venenatis massa. Mauris vel velit tempor, porta eros pretium, consectetur arcu. Suspendisse sit amet placerat tortor. Nam tempor lectus ac mi hendrerit tempor. Sed a dolor sodales, laoreet libero vel, fermentum tellus. Aenean vestibulum interdum interdum. Praesent consectetur fringilla hendrerit. Vestibulum faucibus nibh sed arcu aliquet semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus mollis imperdiet ante ac commodo.</p>
-<p>Aenean porttitor mollis ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam dapibus tincidunt risus et iaculis. Aliquam erat volutpat. Donec feugiat dolor eget ornare rhoncus. Nullam eget dui sem. Aenean odio ex, fermentum id malesuada in, iaculis id mauris. Nunc tincidunt, velit vestibulum aliquam malesuada, dui massa porta ex, vel congue libero justo molestie augue. Aenean eget varius erat, quis eleifend ex. Aliquam erat volutpat. Suspendisse semper commodo ligula, nec eleifend dolor gravida eget. Sed elit elit, mollis in elit id, accumsan euismod velit. Curabitur diam urna, bibendum id lorem vel, pretium dictum diam. Proin pretium dui sed massa placerat viverra. Nullam eget massa condimentum, laoreet erat at, hendrerit lacus.</p>
-<p>Nulla eget orci a mi mattis tincidunt vitae ut ante. Proin tristique urna vitae lobortis auctor. Phasellus in dui interdum dolor bibendum gravida eu nec purus. Nullam lacinia ante sit amet nisi tincidunt, eu tincidunt tellus dictum. Integer pellentesque, arcu nec auctor ultricies, metus tortor finibus magna, vitae fringilla leo dolor sit amet eros. Fusce id justo nec arcu maximus rhoncus vel vel nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam quis mollis elit. Etiam vitae ultricies enim.</p>
-<p>Curabitur ut massa at nulla dapibus faucibus eu quis augue. Vestibulum bibendum laoreet metus. Phasellus sit amet gravida mauris. Donec id ante rutrum, posuere justo id, porttitor quam. Pellentesque aliquam, nunc varius hendrerit maximus, odio diam bibendum felis, a viverra arcu magna eu sem. Sed aliquet convallis eros, ut scelerisque ligula laoreet id. Nulla scelerisque auctor sodales. Morbi dictum, lectus nec dictum ornare, nulla diam semper dui, a semper diam orci et ante.</p>
-<p>Quisque varius sollicitudin est, in ultrices eros faucibus id. Nullam ut ligula ac risus blandit malesuada a in magna. Donec in pretium tellus. Donec nibh nunc, efficitur sit amet interdum sed, convallis nec ligula. Praesent ut nunc vehicula, condimentum orci non, vestibulum lorem. Etiam semper odio at risus porttitor, a vehicula ex luctus. Integer ac lacus quis justo consequat pulvinar at quis leo. Ut sagittis tortor augue, ut vestibulum leo posuere eleifend. Vivamus lectus nibh, semper nec turpis ut, tempus vulputate ex. Integer semper interdum sem, at sodales elit auctor rhoncus. Ut eget justo id urna blandit egestas. Duis tempus, quam nec interdum imperdiet, lorem felis placerat sem, vel pellentesque purus magna sit amet metus. Mauris rutrum nunc nulla, vel efficitur est facilisis in. Donec auctor fermentum felis, vitae tincidunt lacus gravida non. Etiam mollis porttitor lectus, eget suscipit ex ultrices ut.</p>
-<p>Nullam ac felis finibus, dictum sem id, rutrum arcu. Nunc in accumsan quam. Cras nec justo ut elit tincidunt lobortis imperdiet sit amet felis. Proin vitae sem mattis, ullamcorper purus in, fringilla lectus. Nam id enim ut est posuere convallis. Nam felis ante, accumsan id semper nec, congue et libero. Etiam bibendum fermentum orci a consectetur. Donec sed tempor nunc. Aliquam erat volutpat. Nulla in convallis sapien, sit amet fermentum mauris. Integer posuere, lacus nec feugiat tristique, mi dui placerat massa, at ornare lorem eros quis eros.</p>
-<p>Duis nisl tortor, egestas eget eros eu, pulvinar suscipit tortor. Morbi at metus dolor. Proin ultricies tempor ultricies. Suspendisse ornare orci et sodales iaculis. Phasellus gravida vel nulla at porta. Phasellus tempus a quam lobortis commodo. Etiam justo massa, porttitor in pharetra quis, porta vel ex. Donec leo justo, euismod et blandit nec, feugiat quis risus. Nunc eu odio quis nisi tincidunt pulvinar et ut lectus. Nullam porta nisl nec magna auctor pellentesque. Aliquam tincidunt fringilla venenatis. Duis quis consequat augue.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://furina-paimon.github.io/furina-paimon/2025/03/19/%E8%B5%9B%E5%8D%9A%E5%AE%88%E6%B3%95%E5%85%AC%E6%B0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/furina-paimon/images/avatar.gif">
-      <meta itemprop="name" content="River Moon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FOCALORS's BLOG">
-      <meta itemprop="description" content="FOCALORS's BLOG">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | FOCALORS's BLOG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/furina-paimon/2025/03/19/%E8%B5%9B%E5%8D%9A%E5%AE%88%E6%B3%95%E5%85%AC%E6%B0%91/" class="post-title-link" itemprop="url">赛博守法公民</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-03-19 14:53:21" itemprop="dateCreated datePublished" datetime="2025-03-19T14:53:21+08:00">2025-03-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-20 11:50:34" itemprop="dateModified" datetime="2025-03-20T11:50:34+08:00">2025-03-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/furina-paimon/categories/%E7%A7%91%E6%8A%80/" itemprop="url" rel="index"><span itemprop="name">科技</span></a>
-        </span>
-    </span>
-
-  <div class="post-meta">
-  <span class="author">
-    <i class="icon-author"></i>
-    <a href="function () {
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-      }
-      return obj[val].apply(obj, args);
-    }"></a>
-  </span>
-  <span class="date">
-    <i class="icon-date"></i>
-    <time datetime="1742367201000"></time>
-  </span>
-</div>
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>564</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在互联网领域，虽然没有一部像宪法那样的单一根本法，但有以宪法为根本，多部基础性法律相互配合的法律体系，共同为互联网的健康有序发展提供法治保障。</p>
-<h3 id="以宪法为根本"><a href="#以宪法为根本" class="headerlink" title="以宪法为根本"></a>以宪法为根本</h3><p>宪法作为国家的根本法，具有最高的法律效力，是互联网领域所有法律法规的根基。它确立了公民的基本权利和义务，为互联网领域的立法、执法和司法提供了基本准则和价值导向。</p>
-<h3 id="基础性法律"><a href="#基础性法律" class="headerlink" title="基础性法律"></a>基础性法律</h3><ul>
-<li><strong>《网络安全法》</strong>：这是我国首部全面规范网络空间安全管理的基础性法律，确立了网络安全的基本原则，包括网络空间主权原则、网络安全与信息化发展并重原则、共同治理原则等，对网络运行状态监测、风险评估、数据分类分级保护等内容作出了规定。</li>
-<li><strong>《数据安全法》</strong>：明确了数据安全保护的基本制度，如数据分类分级、重要数据保护、数据安全审查、跨境数据流动和数据交易管理等，对数据安全领域进行了全面规范。</li>
-<li><strong>《个人信息保护法》</strong>：对个人信息的处理规则、保护措施、个人信息处理者的义务等内容进行了详细规定，保护了个人信息权益。</li>
-<li><strong>《电子商务法》</strong>：规范了电子商务活动，保障了电子商务各方主体的合法权益，对电子商务平台和经营者的责任、义务等作出了明确规定。</li>
-</ul>
-<h3 id="其他相关法律法规"><a href="#其他相关法律法规" class="headerlink" title="其他相关法律法规"></a>其他相关法律法规</h3><ul>
-<li><strong>《互联网信息服务管理办法》</strong>：对互联网信息服务的提供者和使用者的行为进行了规范，明确了相关责任和义务。</li>
-<li><strong>《计算机信息网络国际联网管理暂行规定》</strong>：对计算机信息网络国际联网的管理作出了规定，保障了国际联网的安全和有序。</li>
-<li><strong>《互联网新闻信息服务管理规定》</strong>：规范了互联网新闻信息服务活动，维护了国家安全和公共利益。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://furina-paimon.github.io/furina-paimon/2025/03/19/%E8%8E%B7%E5%8F%96IP%E8%BD%BB%E8%80%8C%E6%98%93%E4%B8%BE%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%9C%AA%E7%BB%8F%E5%85%81%E8%AE%B8%E4%BC%A0%E6%92%ADIP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/furina-paimon/images/avatar.gif">
-      <meta itemprop="name" content="River Moon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FOCALORS's BLOG">
-      <meta itemprop="description" content="FOCALORS's BLOG">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | FOCALORS's BLOG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/furina-paimon/2025/03/19/%E8%8E%B7%E5%8F%96IP%E8%BD%BB%E8%80%8C%E6%98%93%E4%B8%BE%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%9C%AA%E7%BB%8F%E5%85%81%E8%AE%B8%E4%BC%A0%E6%92%ADIP/" class="post-title-link" itemprop="url">获取IP轻而易举，为什么不能未经允许传播IP</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-03-19 14:48:54" itemprop="dateCreated datePublished" datetime="2025-03-19T14:48:54+08:00">2025-03-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-20 11:50:30" itemprop="dateModified" datetime="2025-03-20T11:50:30+08:00">2025-03-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/furina-paimon/categories/%E7%A7%91%E6%8A%80/" itemprop="url" rel="index"><span itemprop="name">科技</span></a>
-        </span>
-    </span>
-
-  <div class="post-meta">
-  <span class="author">
-    <i class="icon-author"></i>
-    <a href="function () {
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-      }
-      return obj[val].apply(obj, args);
-    }"></a>
-  </span>
-  <span class="date">
-    <i class="icon-date"></i>
-    <time datetime="1742366934000"></time>
-  </span>
-</div>
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="隐私保护角度"><a href="#隐私保护角度" class="headerlink" title="隐私保护角度"></a>隐私保护角度</h3><ul>
-<li><strong>个人信息保护</strong>：网站的IPv4地址属于网络标识信息，与网站的运营和访问等密切相关。如果该IP地址能够关联到特定的个人或组织，那么未经允许分享可能涉及到对他人隐私或商业秘密的侵犯。根据《中华人民共和国民法典》第一千零三十二条的规定，自然人享有隐私权，任何组织或者个人不得以刺探、侵扰、泄露、公开等方式侵害他人的隐私权。同时，《中华人民共和国个人信息保护法》也规定，任何组织、个人不得侵害自然人的个人信息权益。</li>
-<li><strong>网络安全风险</strong>：分享网站IPv4地址可能会增加该网站遭受网络攻击的风险，如DDoS攻击、端口扫描等。攻击者可以利用获取到的IP地址对网站进行恶意攻击，导致网站服务中断、数据泄露等问题，影响网站的正常运行和用户的利益。</li>
-</ul>
-<h3 id="网站运营角度"><a href="#网站运营角度" class="headerlink" title="网站运营角度"></a>网站运营角度</h3><ul>
-<li><strong>违反使用条款</strong>：许多网站在其服务条款或使用协议中明确规定，用户不得未经许可向他人透露网站的相关技术信息，包括IP地址。分享网站IPv4地址可能构成对网站使用条款的违反，导致账号被封禁、服务被终止等后果。</li>
-<li><strong>影响网站流量和排名</strong>：网站的流量和搜索引擎排名等可能会受到IP地址被分享的影响。例如，大量用户通过共享的IP地址直接访问网站，可能会被网站服务器识别为异常流量，进而影响网站的正常流量统计和搜索引擎对网站的评价。</li>
-</ul>
-<h3 id="合理分享的情况"><a href="#合理分享的情况" class="headerlink" title="合理分享的情况"></a>合理分享的情况</h3><ul>
-<li><strong>技术交流与学习</strong>：在一些技术论坛、学习小组等场景下，分享网站IPv4地址用于讨论网络技术、网站架构等非商业、非恶意的目的，通常是可以接受的。但即使在这种情况下，也应注意分享的范围和对象，避免被不法分子利用。</li>
-<li><strong>获得网站授权</strong>：如果获得了网站所有者的明确授权或许可，那么分享其IPv4地址是合法且合理的。在这种情况下，分享行为是在网站所有者的控制和同意之下进行的，不会对网站和他人造成不良影响。</li>
-</ul>
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
-<li><strong>核实信息准确性</strong>：在分享之前，应确保所分享的IPv4地址是准确无误的，避免因错误信息导致他人无法正常访问网站或产生其他问题。</li>
-<li><strong>考虑分享渠道的安全性</strong>：选择安全、可靠的渠道进行分享，避免在不可信的平台或群组中随意分享，防止信息被恶意篡改或滥用。</li>
-<li><strong>尊重他人意愿</strong>：如果分享行为可能会影响到其他用户或相关方，应提前告知并征得他们的同意，尊重他人的选择和权益。</li>
-</ul>
-<p>总之，分享网站IPv4地址需要综合考虑多方面因素，谨慎行事，以避免可能带来的法律风险、安全问题以及其他不良后果。</p>
-<h3 id="可能面临的法律责任"><a href="#可能面临的法律责任" class="headerlink" title="可能面临的法律责任"></a>可能面临的法律责任</h3><ul>
-<li><strong>民事责任</strong>：如果传播他人IP地址的行为对他人造成了实质性的损失或者伤害，比如引发了个人名誉受到损害、日常生活受到干扰或者带来更多其它不良影响，责任人需要承担相应的民事赔偿责任。</li>
-<li><strong>行政责任</strong>：根据《中华人民共和国治安管理处罚法》第四十二条，偷窥、偷拍、窃听、散布他人隐私的，处五日以下拘留或者五百元以下罚款；情节较重的，处五日以上十日以下拘留，可以并处五百元以下罚款。</li>
-<li><strong>刑事责任</strong>：如果传播他人IP地址的行为符合《中华人民共和国刑法》第二百五十三条之一侵犯公民个人信息罪的构成要件，即违反国家有关规定，向他人出售或者提供公民个人信息，情节严重的，可能面临刑事责任。</li>
-</ul>
-<p>总之，虽然获取网站IP较为容易，但在传播时需要谨慎，确保不违反相关法律法规，以避免可能面临的法律风险。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://furina-paimon.github.io/furina-paimon/2025/03/19/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%B3%A8%E6%98%8EIP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/furina-paimon/images/avatar.gif">
-      <meta itemprop="name" content="River Moon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FOCALORS's BLOG">
-      <meta itemprop="description" content="FOCALORS's BLOG">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | FOCALORS's BLOG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/furina-paimon/2025/03/19/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%B3%A8%E6%98%8EIP/" class="post-title-link" itemprop="url">为什么不轻易传播IP</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-03-19 14:47:35" itemprop="dateCreated datePublished" datetime="2025-03-19T14:47:35+08:00">2025-03-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-20 11:50:39" itemprop="dateModified" datetime="2025-03-20T11:50:39+08:00">2025-03-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/furina-paimon/categories/%E7%A7%91%E6%8A%80/" itemprop="url" rel="index"><span itemprop="name">科技</span></a>
-        </span>
-    </span>
-
-  <div class="post-meta">
-  <span class="author">
-    <i class="icon-author"></i>
-    <a href="function () {
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-      }
-      return obj[val].apply(obj, args);
-    }"></a>
-  </span>
-  <span class="date">
-    <i class="icon-date"></i>
-    <time datetime="1742366855000"></time>
-  </span>
-</div>
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="隐私问题"><a href="#隐私问题" class="headerlink" title="隐私问题"></a>隐私问题</h3><ul>
-<li><strong>个人隐私泄露</strong> ：服务器 IP 地址属于敏感的隐私信息。一旦泄露，不法分子可能利用技术手段对该 IP 地址进行定位，进而获取服务器所有者的地理位置等个人信息，导致隐私泄露，使个人的人身和财产安全受到威胁。</li>
-<li><strong>企业隐私受损</strong> ：对于企业来说，服务器 IP 地址泄露可能导致企业内部的商业机密、客户数据等敏感信息面临风险。竞争对手或恶意攻击者可能会利用这一信息，对企业进行网络攻击、数据窃取等，给企业带来巨大的经济损失和声誉损害。</li>
-</ul>
-<h3 id="安全风险"><a href="#安全风险" class="headerlink" title="安全风险"></a>安全风险</h3><ul>
-<li><strong>网络攻击风险</strong> ：传播他人的服务器 IP 地址后，黑客可以轻易地找到目标服务器，并对其发起各种网络攻击，如 DDoS 攻击、端口扫描等。这些攻击可能导致服务器瘫痪、数据丢失，严重影响服务器的正常运行和用户的使用体验。</li>
-<li><strong>系统漏洞利用</strong> ：不法分子在获取服务器 IP 地址后，可能会深入研究该服务器所使用的技术和系统，寻找其中的漏洞。一旦发现漏洞，他们便利用这些漏洞入侵服务器，篡改网站内容、窃取用户数据等，给服务器所有者带来严重的安全威胁。</li>
-</ul>
-<h3 id="法律责任"><a href="#法律责任" class="headerlink" title="法律责任"></a>法律责任</h3><ul>
-<li><strong>民事责任</strong> ：传播他人服务器 IP 地址侵犯了他人的隐私权和知识产权等合法权益，根据相关法律法规，如《中华人民共和国民法典》中关于隐私权和个人信息保护的规定，传播者需要承担停止侵害、赔礼道歉、赔偿损失等民事责任。</li>
-<li><strong>行政责任</strong> ：如果这种传播行为导致了网络安全问题或引发其他违法后果，根据《中华人民共和国网络安全法》《中华人民共和国个人信息保护法》等相关法律法规，传播者可能会受到行政处罚，如警告、罚款等。</li>
-<li><strong>刑事责任</strong> ：在某些情况下，传播他人服务器 IP 地址的行为可能构成犯罪。例如，若明知该行为会导致服务器遭受严重攻击，仍故意传播，造成严重后果的，可能会以破坏计算机信息系统罪等罪名被追究刑事责任。</li>
-</ul>
-<p>在聊天软件中传播他人的服务器 IP 地址是一种不当行为，可能会给他人带来诸多麻烦和损失，因此应当避免这种行为，尊重他人的隐私和权益，共同维护网络环境的安全和秩序。</p>
-<h3 id="《中华人民共和国民法典》"><a href="#《中华人民共和国民法典》" class="headerlink" title="《中华人民共和国民法典》"></a>《中华人民共和国民法典》</h3><ul>
-<li><strong>隐私权保护</strong>：第一千零三十二条规定，自然人享有隐私权，任何组织或者个人不得以刺探、侵扰、泄露、公开等方式侵害他人的隐私权。IP地址作为个人信息的一部分，属于个人隐私范畴，未经他人同意擅自暴露其IP，可能构成对隐私权的侵犯。</li>
-</ul>
-<h3 id="《中华人民共和国治安管理处罚法》"><a href="#《中华人民共和国治安管理处罚法》" class="headerlink" title="《中华人民共和国治安管理处罚法》"></a>《中华人民共和国治安管理处罚法》</h3><ul>
-<li><strong>散布他人隐私的处罚</strong>：第四十二条明确指出，偷窥、偷拍、窃听、散布他人隐私的，处五日以下拘留或者五百元以下罚款；情节较重的，处五日以上十日以下拘留，可以并处五百元以下罚款。</li>
-</ul>
-<h3 id="《中华人民共和国刑法》"><a href="#《中华人民共和国刑法》" class="headerlink" title="《中华人民共和国刑法》"></a>《中华人民共和国刑法》</h3><ul>
-<li><strong>侵犯公民个人信息罪</strong>：第二百五十三条之一规定，违反国家有关规定，向他人出售或者提供公民个人信息，情节严重的，处三年以下有期徒刑或者拘役，并处或者单处罚金；情节特别严重的，处三年以上七年以下有期徒刑，并处罚金。如果暴露他人IP的行为符合该罪的构成要件，也可能面临刑事责任。</li>
-</ul>
-<h3 id="《中华人民共和国网络安全法》"><a href="#《中华人民共和国网络安全法》" class="headerlink" title="《中华人民共和国网络安全法》"></a>《中华人民共和国网络安全法》</h3><ul>
-<li><strong>个人信息保护</strong>：第四十一条规定，网络运营者收集、使用个人信息，应当遵循合法、正当、必要的原则，公开收集、使用规则，明示收集、使用信息的目的、方式和范围，并经被收集者同意。第四十二条规定，网络运营者不得泄露、篡改或者毁损其收集的个人信息。因此，若网络运营者未经用户同意擅自暴露其IP，违反了上述规定，可能面临相应的法律责任。</li>
-</ul>
-<h3 id="《中华人民共和国数据安全法》"><a href="#《中华人民共和国数据安全法》" class="headerlink" title="《中华人民共和国数据安全法》"></a>《中华人民共和国数据安全法》</h3><ul>
-<li><strong>数据处理活动的规范</strong>：第八条规定，开展数据处理活动，应当遵守法律、法规，尊重社会公德和伦理，遵守商业道德和职业道德，诚实守信，履行数据安全保护义务，承担社会责任，不得危害国家安全、公共利益，不得损害个人、组织的合法权益。若暴露他人IP的行为属于非法的数据处理活动，也可能构成违法。</li>
-</ul>
 
       
     </div>
@@ -1546,9 +1028,348 @@
 
 
 
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/furina-paimon/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/furina-paimon/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://furina-paimon.github.io/furina-paimon/2025/03/15/Typora%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/furina-paimon/images/avatar.gif">
+      <meta itemprop="name" content="River Moon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FOCALORS's BLOG">
+      <meta itemprop="description" content="FOCALORS's BLOG">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | FOCALORS's BLOG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/furina-paimon/2025/03/15/Typora%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">Typora的快捷键</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-15 19:30:52" itemprop="dateCreated datePublished" datetime="2025-03-15T19:30:52+08:00">2025-03-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-20 11:52:30" itemprop="dateModified" datetime="2025-03-20T11:52:30+08:00">2025-03-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/furina-paimon/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  <div class="post-meta">
+  <span class="author">
+    <i class="icon-author"></i>
+    <a href="function () {
+      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+      return obj[val].apply(obj, args);
+    }"></a>
+  </span>
+  <span class="date">
+    <i class="icon-date"></i>
+    <time datetime="1742038252000"></time>
+  </span>
+</div>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>474</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><ul>
+<li><strong>新建文件</strong>：<code>Ctrl+N</code>（Windows）&#x2F; <code>Cmd+N</code>（macOS）</li>
+<li><strong>打开文件</strong>：<code>Ctrl+O</code>（Windows）&#x2F; <code>Cmd+O</code>（macOS）</li>
+<li><strong>保存文件</strong>：<code>Ctrl+S</code>（Windows）&#x2F; <code>Cmd+S</code>（macOS）</li>
+<li><strong>另存为</strong>：<code>Ctrl+Shift+S</code>（Windows）&#x2F; <code>Cmd+Shift+S</code>（macOS）</li>
+<li><strong>打印</strong>：<code>Ctrl+P</code>（Windows）&#x2F; <code>Cmd+P</code>（macOS）</li>
+<li><strong>关闭窗口</strong>：<code>Ctrl+W</code>（Windows）&#x2F; <code>Cmd+W</code>（macOS）</li>
+</ul>
+<h3 id="编辑操作"><a href="#编辑操作" class="headerlink" title="编辑操作"></a>编辑操作</h3><ul>
+<li><strong>撤销</strong>：<code>Ctrl+Z</code>（Windows）&#x2F; <code>Cmd+Z</code>（macOS）</li>
+<li><strong>重做</strong>：<code>Ctrl+Y</code> 或 <code>Ctrl+Shift+Z</code>（Windows）&#x2F; <code>Cmd+Y</code> 或 <code>Cmd+Shift+Z</code>（macOS）</li>
+<li><strong>剪切</strong>：<code>Ctrl+X</code>（Windows）&#x2F; <code>Cmd+X</code>（macOS）</li>
+<li><strong>复制</strong>：<code>Ctrl+C</code>（Windows）&#x2F; <code>Cmd+C</code>（macOS）</li>
+<li><strong>粘贴</strong>：<code>Ctrl+V</code>（Windows）&#x2F; <code>Cmd+V</code>（macOS）</li>
+<li><strong>删除</strong>：<code>Delete</code> 或 <code>Backspace</code></li>
+</ul>
+<h3 id="文本格式"><a href="#文本格式" class="headerlink" title="文本格式"></a>文本格式</h3><ul>
+<li><strong>加粗</strong>：<code>Ctrl+B</code>（Windows）&#x2F; <code>Cmd+B</code>（macOS）</li>
+<li><strong>斜体</strong>：<code>Ctrl+I</code>（Windows）&#x2F; <code>Cmd+I</code>（macOS）</li>
+<li><strong>下划线</strong>：<code>Ctrl+U</code>（Windows）&#x2F; <code>Cmd+U</code>（macOS）</li>
+<li><strong>删除线</strong>：<code>Ctrl+D</code>（Windows）&#x2F; <code>Cmd+D</code>（macOS）</li>
+<li><strong>标题</strong>：<ul>
+<li>一级标题：<code>Ctrl+1</code>（Windows）&#x2F; <code>Cmd+1</code>（macOS）</li>
+<li>二级标题：<code>Ctrl+2</code>（Windows）&#x2F; <code>Cmd+2</code>（macOS）</li>
+<li>三级标题：<code>Ctrl+3</code>（Windows）&#x2F; <code>Cmd+3</code>（macOS）</li>
+<li>四级标题：<code>Ctrl+4</code>（Windows）&#x2F; <code>Cmd+4</code>（macOS）</li>
+<li>五级标题：<code>Ctrl+5</code>（Windows）&#x2F; <code>Cmd+5</code>（macOS）</li>
+<li>六级标题：<code>Ctrl+6</code>（Windows）&#x2F; <code>Cmd+6</code>（macOS）</li>
+</ul>
+</li>
+<li><strong>无序列表</strong>：<code>Ctrl+Shift+L</code>（Windows）&#x2F; <code>Cmd+Shift+L</code>（macOS）</li>
+<li><strong>有序列表</strong>：<code>Ctrl+Alt+L</code>（Windows）&#x2F; <code>Cmd+Option+L</code>（macOS）</li>
+<li><strong>引用</strong>：<code>Ctrl+Shift+Q</code>（Windows）&#x2F; <code>Cmd+Shift+Q</code>（macOS）</li>
+<li><strong>代码块</strong>：<code>Ctrl+Shift+C</code>（Windows）&#x2F; <code>Cmd+Shift+C</code>（macOS）</li>
+<li><strong>插入链接</strong>：<code>Ctrl+L</code>（Windows）&#x2F; <code>Cmd+L</code>（macOS）</li>
+<li><strong>插入图像</strong>：<code>Ctrl+Alt+I</code>（Windows）&#x2F; <code>Cmd+Option+I</code>（macOS）</li>
+</ul>
+<h3 id="视图操作"><a href="#视图操作" class="headerlink" title="视图操作"></a>视图操作</h3><ul>
+<li><strong>切换全屏模式</strong>：<code>F11</code>（Windows）&#x2F; <code>Ctrl+Cmd+F</code>（macOS）</li>
+<li><strong>切换写作模式</strong>：<code>Ctrl+Shift+F</code>（Windows）&#x2F; <code>Cmd+Shift+F</code>（macOS）</li>
+<li><strong>切换阅读模式</strong>：<code>Ctrl+Shift+R</code>（Windows）&#x2F; <code>Cmd+Shift+R</code>（macOS）</li>
+<li><strong>切换源代码模式</strong>：<code>Ctrl+Shift+M</code>（Windows）&#x2F; <code>Cmd+Shift+M</code>（macOS）</li>
+<li><strong>放大文本</strong>：<code>Ctrl++</code>（Windows）&#x2F; <code>Cmd++</code>（macOS）</li>
+<li><strong>缩小文本</strong>：<code>Ctrl+-</code>（Windows）&#x2F; <code>Cmd+-</code>（macOS）</li>
+<li><strong>恢复默认大小</strong>：<code>Ctrl+0</code>（Windows）&#x2F; <code>Cmd+0</code>（macOS）</li>
+</ul>
+<h3 id="搜索与替换"><a href="#搜索与替换" class="headerlink" title="搜索与替换"></a>搜索与替换</h3><ul>
+<li><strong>查找</strong>：<code>Ctrl+F</code>（Windows）&#x2F; <code>Cmd+F</code>（macOS）</li>
+<li><strong>查找下一个</strong>：<code>F3</code>（Windows）&#x2F; <code>Cmd+G</code>（macOS）</li>
+<li><strong>查找上一个</strong>：<code>Shift+F3</code>（Windows）&#x2F; <code>Cmd+Shift+G</code>（macOS）</li>
+<li><strong>替换</strong>：<code>Ctrl+H</code>（Windows）&#x2F; <code>Cmd+Option+F</code>（macOS）</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><strong>撤销格式化</strong>：<code>Ctrl+Shift+Z</code>（Windows）&#x2F; <code>Cmd+Shift+Z</code>（macOS）</li>
+<li><strong>显示&#x2F;隐藏格式标记</strong>：<code>Ctrl+Shift+M</code>（Windows）&#x2F; <code>Cmd+Shift+M</code>（macOS）</li>
+<li><strong>插入时间戳</strong>：<code>Ctrl+Shift+T</code>（Windows）&#x2F; <code>Cmd+Shift+T</code>（macOS）</li>
+<li><strong>插入表格</strong>：<code>Ctrl+Shift+T</code>（Windows）&#x2F; <code>Cmd+Shift+T</code>（macOS）</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://furina-paimon.github.io/furina-paimon/2025/03/15/Typora/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/furina-paimon/images/avatar.gif">
+      <meta itemprop="name" content="River Moon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FOCALORS's BLOG">
+      <meta itemprop="description" content="FOCALORS's BLOG">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | FOCALORS's BLOG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/furina-paimon/2025/03/15/Typora/" class="post-title-link" itemprop="url">Typora</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-15 19:27:39" itemprop="dateCreated datePublished" datetime="2025-03-15T19:27:39+08:00">2025-03-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-20 11:52:22" itemprop="dateModified" datetime="2025-03-20T11:52:22+08:00">2025-03-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/furina-paimon/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  <div class="post-meta">
+  <span class="author">
+    <i class="icon-author"></i>
+    <a href="function () {
+      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+      return obj[val].apply(obj, args);
+    }"></a>
+  </span>
+  <span class="date">
+    <i class="icon-date"></i>
+    <time datetime="1742038059000"></time>
+  </span>
+</div>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Typora 是一款流行的 Markdown 编辑器，以其简洁的界面和高效的写作体验而受到许多用户的喜爱。以下是一些常见的 Typora 使用方法和技巧：</p>
+<h3 id="1-安装与启动"><a href="#1-安装与启动" class="headerlink" title="1. 安装与启动"></a>1. 安装与启动</h3><ul>
+<li><strong>下载与安装</strong>：访问 Typora 的官方网站 <a target="_blank" rel="noopener" href="https://www.typora.io/">https://www.typora.io/</a>，根据你的操作系统（Windows、macOS 或 Linux）下载相应的安装包并安装。</li>
+<li><strong>启动</strong>：安装完成后，双击 Typora 图标启动编辑器。</li>
+</ul>
+<h3 id="2-界面介绍"><a href="#2-界面介绍" class="headerlink" title="2. 界面介绍"></a>2. 界面介绍</h3><ul>
+<li><strong>编辑区</strong>：主界面中央的空白区域，用于输入和编辑文本。</li>
+<li><strong>菜单栏</strong>：顶部的菜单栏提供了各种操作选项，如文件操作、编辑、视图、插入等。</li>
+<li><strong>格式栏</strong>：在某些视图模式下，顶部或侧面会有格式工具栏，提供快速格式化按钮。</li>
+</ul>
+<h3 id="3-基本操作"><a href="#3-基本操作" class="headerlink" title="3. 基本操作"></a>3. 基本操作</h3><ul>
+<li><strong>新建文件</strong>：点击菜单栏的 <code>文件 &gt; 新建</code> 或使用快捷键 <code>Ctrl+N</code>（Windows）&#x2F; <code>Cmd+N</code>（macOS）。</li>
+<li><strong>打开文件</strong>：点击 <code>文件 &gt; 打开</code> 或使用快捷键 <code>Ctrl+O</code>（Windows）&#x2F; <code>Cmd+O</code>（macOS）。</li>
+<li><strong>保存文件</strong>：点击 <code>文件 &gt; 保存</code> 或使用快捷键 <code>Ctrl+S</code>（Windows）&#x2F; <code>Cmd+S</code>（macOS）。Typora 支持多种文件格式，如 <code>.md</code>、<code>.txt</code>、<code>.html</code> 等。</li>
+<li><strong>导出文件</strong>：点击 <code>文件 &gt; 导出</code>，可以选择导出为 PDF、HTML、DOCX 等格式。</li>
+</ul>
+<h3 id="4-文档编辑"><a href="#4-文档编辑" class="headerlink" title="4. 文档编辑"></a>4. 文档编辑</h3><ul>
+<li><strong>输入文本</strong>：直接在编辑区输入文本内容。</li>
+<li><strong>标题</strong>：使用 <code>#</code> 符号创建标题，<code>#</code> 的数量表示标题级别（1 到 6 级）。<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 一级标题</span></span><br><span class="line"><span class="section">## 二级标题</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>段落</strong>：直接输入文本即可创建段落，段落之间需要有一个空行。</li>
+<li><strong>强调</strong>：使用 <code>*</code> 或 <code>_</code> 表示斜体，<code>**</code> 表示粗体，<code>***</code> 表示粗体斜体。<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="emphasis">*斜体文本*</span> 或 <span class="emphasis">_斜体文本_</span></span><br><span class="line"><span class="strong">**粗体文本**</span> 或 <span class="strong">__粗体文本__</span></span><br><span class="line"><span class="strong">**<span class="emphasis">*粗体斜体*</span>**</span> 或 <span class="strong">__<span class="emphasis">_粗体斜体_</span>__</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>列表</strong>：<ul>
+<li>无序列表：使用 <code>*</code>、<code>+</code> 或 <code>-</code>。<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">*</span> 无序列表项 1</span><br><span class="line"><span class="bullet">*</span> 无序列表项 2</span><br></pre></td></tr></table></figure></li>
+<li>有序列表：使用数字后跟点 <code>.</code>。<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 有序列表项 1</span><br><span class="line"><span class="bullet">2.</span> 有序列表项 2</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><strong>链接</strong>：使用方括号 <code>[]</code> 包裹链接文本，然后使用圆括号 <code>()</code> 包裹链接地址。<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">链接文本</span>](<span class="link">链接地址</span>)</span><br></pre></td></tr></table></figure></li>
+<li><strong>图像</strong>：与链接类似，但在前面添加一个感叹号 <code>!</code>。<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">替代文本</span>](<span class="link">图像地址</span>)</span><br></pre></td></tr></table></figure></li>
+<li><strong>引用</strong>：使用 <code>&gt;</code> 符号创建块引用。<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="quote">&gt; 这是一个块引用。</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>代码块</strong>：使用反引号 <code>`</code> 包裹代码，或者使用缩进（4 个空格或一个制表符）。<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">`这是一个内联代码块`</span></span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line"><span class="code">    这是一个代码块</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="5-视图模式"><a href="#5-视图模式" class="headerlink" title="5. 视图模式"></a>5. 视图模式</h3><ul>
+<li><strong>写作模式</strong>：点击菜单栏的 <code>视图 &gt; 写作模式</code>，隐藏所有工具栏和侧边栏，专注于文本编辑。</li>
+<li><strong>阅读模式</strong>：点击 <code>视图 &gt; 阅读模式</code>，以只读模式查看文档。</li>
+<li><strong>源代码模式</strong>：点击 <code>视图 &gt; 源代码模式</code>，显示原始 Markdown 代码。</li>
+</ul>
+<h3 id="6-插入内容"><a href="#6-插入内容" class="headerlink" title="6. 插入内容"></a>6. 插入内容</h3><ul>
+<li><strong>插入链接或图像</strong>：点击菜单栏的 <code>插入 &gt; 链接</code> 或 <code>插入 &gt; 图像</code>，或者使用快捷键 <code>Ctrl+L</code>（Windows）&#x2F; <code>Cmd+L</code>（macOS）和 <code>Ctrl+Alt+I</code>（Windows）&#x2F; <code>Cmd+Option+I</code>（macOS）。</li>
+<li><strong>插入表格</strong>：点击 <code>插入 &gt; 表格</code>，选择表格的行列数。</li>
+<li><strong>插入代码块</strong>：点击 <code>插入 &gt; 代码块</code>，选择编程语言。</li>
+<li><strong>插入数学公式</strong>：点击 <code>插入 &gt; 数学块</code> 或 <code>插入 &gt; 行内数学</code>，输入 LaTeX 格式的数学公式。</li>
+</ul>
+<h3 id="7-自定义设置"><a href="#7-自定义设置" class="headerlink" title="7. 自定义设置"></a>7. 自定义设置</h3><ul>
+<li><strong>主题设置</strong>：点击菜单栏的 <code>Typora &gt; 设置</code>（macOS）或 <code>工具 &gt; 选项</code>（Windows&#x2F;Linux），在 <code>外观</code> 选项卡中选择或自定义主题。</li>
+<li><strong>快捷键设置</strong>：在设置中可以自定义快捷键，提高编辑效率。</li>
+<li><strong>语法高亮</strong>：在设置中启用语法高亮，使代码块和数学公式等更易于阅读。</li>
+</ul>
+<h3 id="8-同步与备份"><a href="#8-同步与备份" class="headerlink" title="8. 同步与备份"></a>8. 同步与备份</h3><ul>
+<li><strong>iCloud 同步</strong>（macOS）：在设置中启用 iCloud 同步，跨设备同步文档。</li>
+<li><strong>备份文档</strong>：定期使用 <code>文件 &gt; 导出</code> 功能备份重要文档。</li>
+</ul>
+<h3 id="9-实用技巧"><a href="#9-实用技巧" class="headerlink" title="9. 实用技巧"></a>9. 实用技巧</h3><ul>
+<li><strong>快速格式化</strong>：使用格式栏按钮或快捷键快速应用标题、列表、引用等格式。</li>
+<li><strong>实时预览</strong>：Typora 的一大特点是实时渲染，输入时即可看到格式化效果，无需切换预览模式。</li>
+<li><strong>多窗口编辑</strong>：可以同时打开多个文档窗口，方便对比和编辑。</li>
+<li><strong>搜索与替换</strong>：使用快捷键 <code>Ctrl+F</code>（Windows）&#x2F; <code>Cmd+F</code>（macOS）打开搜索框，进行文本搜索与替换。</li>
+</ul>
+<p>Typora 的简洁界面和丰富功能使其成为 Markdown 编辑的首选工具之一。通过熟悉上述使用方法，可以更高效地进行文档编写和管理。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
 
 </div>
   </main>
@@ -1562,14 +1383,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">13k</span>
+    <span title="站点总字数">5k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">47 分钟</span>
+    <span title="站点阅读时长">20 分钟</span>
   </span>
 </div><footer>
     <p style="color: #6c757d; font-size: 0.9em; margin-top: 5px;">2024-2025 River Moon 保留所有权利. 2025 focalors.online - 保留所有权利    | 邮箱：contact@focalors.online |</p>
